@@ -2,7 +2,7 @@ import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { Navigate, useLoaderData, useNavigate } from "react-router-dom";
 
 const Profile = () => {
-  //const profile = useLoaderData();
+  const profile = useLoaderData();
 
   const auth = getAuth();
   const navigate = useNavigate();
@@ -19,6 +19,9 @@ const Profile = () => {
 
   return (
     <div>
+      <div>{`${profile.email} is ${
+        profile.emailVerified ? "verified" : "not verified"
+      }`}</div>
       <button onClick={logOut}>Log Out</button>
     </div>
   );

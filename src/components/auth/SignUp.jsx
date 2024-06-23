@@ -1,9 +1,14 @@
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  sendEmailVerification,
+} from "firebase/auth";
 import React, { useState } from "react";
 import { Link, Navigate, redirect, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const auth = getAuth();
+
   const [email, setEmail] = useState("");
   const [pass, setPassword] = useState("");
 
@@ -15,8 +20,8 @@ const SignUp = () => {
         console.log(userCredential.user.email);
       })
       .then(() => {
+        // sendVerificationEmail();
         console.log("Redirecting to home...");
-        navigate("/");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -26,8 +31,19 @@ const SignUp = () => {
       });
   };
 
+  const sendVerificationEmail = () => {
+    sendEmailVerification(auth.currentUser)
+      .then(() => {
+        console.log("Verification email sent");
+        navigate("/");
+      })
+      .catch(() => {
+        console.log("Unable to send verification email");
+      });
+  };
+
   return (
-    <div className="w-full flex flex-col mx-auto items-center mt-16 bg-gray-100 rounded-lg py-8">
+    <div className="w-full flex flex-col mx-auto items-center mt-16 bg-gray-100 rounded-lg py-8 lg:max-w-screen-2xl">
       <div className="text-5xl font-normal">Hi!</div>
       <div className="text-lg">Create an account</div>
       <div className="flex flex-col gap-12 mt-12">

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const HomeScreenCard = (props) => {
   return (
     <div
-      className={`${props.classToModify} flex flex-col h-96 justify-center gap-4 text-center`}
+      className={`${props.classToModify} flex flex-col h-96 w-full justify-center gap-4 text-center`}
     >
       <h1 className="text-3xl lg:text-5xl font-semibold lg:font-bold flex justify-center">
         {props.title}

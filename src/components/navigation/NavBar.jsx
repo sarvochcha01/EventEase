@@ -48,7 +48,7 @@ const NavBar = () => {
               </Link>
             </li>
             <li className="hidden lg:flex gap-2 rounded-lg hover:cursor-pointer hover:bg-gray-100">
-              <Link className="flex self-center gap-2 p-3" to="/book">
+              <Link className="flex self-center gap-2 p-3" to="/events">
                 <div className="flex items-center">
                   <HiOutlineTicket size={20} />
                 </div>

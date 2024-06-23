@@ -23,6 +23,7 @@ const LogIn = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(`${errorCode}: ${errorMessage}`);
       });
   };
 
@@ -39,7 +40,7 @@ const LogIn = () => {
   });
 
   return (
-    <div className="w-full flex flex-col mx-auto items-center mt-16 bg-gray-100 rounded-lg py-8">
+    <div className="w-full flex flex-col mx-auto items-center mt-16 bg-gray-100 rounded-lg py-8 lg:max-w-screen-2xl">
       <div className="text-5xl font-normal">Welcome!</div>
       <div className="text-lg">Sign in to continue</div>
       <div className="flex flex-col gap-12 mt-12">

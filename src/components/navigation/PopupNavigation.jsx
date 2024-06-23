@@ -18,7 +18,7 @@ const PopupNavigation = () => {
           </Link>
         </li>
         <li className="flex gap-2  align-middle p-2 rounded-lg hover:cursor-pointer hover:bg-gray-100">
-          <Link className="flex self-center justify-center gap-2" to="/book">
+          <Link className="flex self-center justify-center gap-2" to="/events">
             <div className="icon flex self-center">
               <HiOutlineTicket size={20} />
             </div>

@@ -12,7 +12,7 @@ const Home = () => {
         buttonText="Host an Event"
       />
       <HomeScreenCard
-        linkTo="/book"
+        linkTo="/events"
         classToModify="bg-gray-100 mt-16"
         title="Upcoming Events"
         subtitle="Check out the events coming up next and book your passes now!"
