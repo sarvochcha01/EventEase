@@ -26,15 +26,15 @@ const Name = () => {
             placeholder="Enter event name"
             className="px-2 py-2 w-80 appearance-none bg-transparent outline-none focus:bg-none"
             value={eventDetails.eventName}
+            onChange={handleChange}
           />
         </div>
-        <button
+        <Link
           to="description"
           className="flex self-center justify-center bg-gray-950 text-white w-56 rounded-lg py-4 text-lg hover:bg-white hover:text-gray-950 hover:outline hover:outline-2 transition-all duration-150 hover:shadow-2xl "
-          onClick={() => validate("eventName", "description")}
         >
           Continue
-        </button>
+        </Link>
       </div>
     </div>
   );

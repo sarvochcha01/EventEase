@@ -9,12 +9,6 @@ const EventDescription = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (pageNum === 0) {
-      navigate("/host");
-    }
-  }, []);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEventDetails({ ...eventDetails, [name]: value });
