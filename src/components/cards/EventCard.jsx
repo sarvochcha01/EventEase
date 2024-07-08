@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 
+
 const EventCard = (props) => {
   const date = new Date(props.dateTime);
 
   const day = date.getDate();
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
+  // const Razorpay = require('razorpay');
 
   return (
     <div className=" w-full flex flex-col p-4 bg-gray-100 rounded-xl lg:w-96">
@@ -25,8 +27,11 @@ const EventCard = (props) => {
       >
         Book Now
       </Link>
+
     </div>
   );
+  
 };
+
 
 export default EventCard;

@@ -29,6 +29,9 @@ import BookPassesLoader from "./loaders/BookPassesLoader.js";
 import EventPage from "./Pages/EventPage.jsx";
 import EventPageLoader from "./loaders/EventPageLoader.js";
 import EventDescription from "./components/host/EventDescription.jsx";
+import Signin from "./components/auth/Signin.jsx"
+import { Provider } from "react-redux";
+import Store from './components/store/Store.js'
 
 // main.jsx
 const router = createBrowserRouter(
@@ -50,16 +53,19 @@ const router = createBrowserRouter(
 
       <Route path="about-us" element={<AboutUs />} />
       <Route path="contact-us" element={<ContactUs />} />
-      <Route path="login" element={<LogIn />} />
+      <Route path="login" element={<Signin />} />
       <Route path="signup" element={<SignUp />} />
       <Route path="profile" element={<Profile />} loader={ProfileLoader} />
       <Route path="reset-password" element={<ResetPassword />} />
+      
     </Route>
   )
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <Provider store={Store}>
     <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );

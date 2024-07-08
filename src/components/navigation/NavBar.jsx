@@ -8,19 +8,24 @@ import { IoMdClose } from "react-icons/io";
 import { HiOutlineTicket } from "react-icons/hi";
 import { MdOutlineEvent } from "react-icons/md";
 import { MdOutlineAccountCircle } from "react-icons/md";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+
 
 const NavBar = () => {
   const [isPopupNavOpen, togglePopupNav] = useState(false);
+  const authStatus=useSelector((state)=>(state.auth.status))
 
   const togglePopupNavigation = () => {
     console.log(isPopupNavOpen);
     togglePopupNav((prevState) => !prevState);
   };
 
+
   return (
     <>
       <nav className="flex items-center justify-between w-full lg:max-w-screen-2xl self-center px-4 h-16 font-inter lg:px-24 ">
-        {isPopupNavOpen && <PopupNavigation />}
+        {/* {isPopupNavOpen && <PopupNavigation />} */}
         <Link to="/">
           <div className="logo flex text-3xl text-logo font-bold">
             EventEase
@@ -28,7 +33,7 @@ const NavBar = () => {
         </Link>
         <div className="buttons">
           <ul className="flex">
-            <li
+            {/* <li
               onClick={togglePopupNavigation}
               className="hover:cursor-pointer lg:hidden"
             >
@@ -38,29 +43,33 @@ const NavBar = () => {
               {!isPopupNavOpen && (
                 <CiMenuBurger size={30} className="text-gray-400" />
               )}
-            </li>
+            </li> */}
             <li className="hidden lg:flex gap-2 rounded-lg hover:cursor-pointer hover:bg-gray-100">
-              <Link className="flex self-center gap-2 p-3" to="/host">
+              <div style={{display:!authStatus?'none':'block'}}>
+              <Link className="flex self-center gap-2 p-3 " to="/host">
                 <div className="flex items-center">
                   <MdOutlineEvent size={20} />
                 </div>
                 <div className="label ">Host an Event</div>
               </Link>
+              </div>
             </li>
             <li className="hidden lg:flex gap-2 rounded-lg hover:cursor-pointer hover:bg-gray-100">
+            <div style={{display:!authStatus?'none':'block'}}>
               <Link className="flex self-center gap-2 p-3" to="/events">
                 <div className="flex items-center">
                   <HiOutlineTicket size={20} />
                 </div>
                 <div className="label ">Book Passes</div>
               </Link>
+              </div>
             </li>
-            <li className="hidden lg:flex gap-2 rounded-lg hover:cursor-pointer hover:bg-gray-100">
+            <li className="hidden lg:flex gap-2 rounded-lg 	bg-slate-400 hover:cursor-pointer hover:bg-gray-500 hover:text-slate-300">
               <Link className="flex self-center gap-2 p-3" to="profile">
                 <div className="flex items-center">
                   <MdOutlineAccountCircle size={20} />
                 </div>
-                <div className="label ">Profile</div>
+                <div>Log-In/Sign-Up</div>
               </Link>
             </li>
           </ul>

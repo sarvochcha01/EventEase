@@ -9,7 +9,7 @@ const BookPasses = () => {
   //   console.log(`${doc.id} => ${doc.data().formValues.city}`);
   // });
 
-  // console.log(data);
+  console.log(data);
 
   const events = [];
 

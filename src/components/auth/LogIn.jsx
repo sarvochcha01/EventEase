@@ -1,18 +1,19 @@
 import {
-  getAuth,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
+  // getAuth,
+  // onAuthStateChanged,
+  signInWithEmailAndPassword,signInWithPopup,GoogleAuthProvider
 } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import {auth} from "../../firebaseConfig"
 
 const LogIn = () => {
-  const auth = getAuth();
 
   const [email, setEmail] = useState("");
   const [pass, setPassword] = useState("");
 
   const navigate = useNavigate();
+
 
   const signIn = () => {
     signInWithEmailAndPassword(auth, email, pass)
@@ -27,17 +28,23 @@ const LogIn = () => {
       });
   };
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/auth.user
-      const uid = user.uid;
-      // ...
-    } else {
-      // User is signed out
-      // ...
-    }
-  });
+  const sign=()=> {
+    const provider =   new GoogleAuthProvider();
+  return signInWithPopup(auth, provider)
+    
+}
+
+//   // onAuthStateChanged(auth, (user) => {
+//   //   if (user) {
+//   //     // User is signed in, see docs for a list of available properties
+//   //     // https://firebase.google.com/docs/reference/js/auth.user
+//   //     const uid = user.uid;
+//   //     // ...
+//   //   } else {
+//   //     // User is signed out
+//   //     // ...
+//   //   }
+//   // });
 
   return (
     <div className="w-full flex flex-col mx-auto items-center mt-16 bg-gray-100 rounded-lg py-8 lg:max-w-screen-2xl">
@@ -78,9 +85,16 @@ const LogIn = () => {
           <Link to="/signup" className="font-extrabold underline pl-2">
             Sign Up
           </Link>
+          
+          <div className="mt-4 flex justify-center">
+          <button className="flex pr-5 justify-center text-center hover:border-slate-400 border-2 border-slate-600 rounded-lg h-7 w-50">
+          <img src="google.png " alt="" className="h-6 m-auto" onClick={sign}/>
+          Sign Up with Google</button>
+          </div>
         </span>
       </div>
     </div>
+    
   );
 };
 
