@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, useLoaderData, useParams } from "react-router-dom";
+import axios from 'axios'
+import { useEffect } from "react";
 
 const EventPage = () => {
   const data = useLoaderData();
@@ -14,6 +16,63 @@ const EventPage = () => {
   const min = datetime.getMinutes();
 
   const am = datetime.gett;
+
+  useEffect(() => {
+    // Dynamically load the Razorpay script
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
+  const handlePayment = async () => {
+    try {
+      // Create order on backend
+      const orderResponse = await axios.post('http://localhost:5000/create-order', {
+        amount: 500, // amount in rupees
+        currency: 'INR',
+        receipt: 'receipt#1'
+      });
+      const order = orderResponse.data;
+
+      // Razorpay options
+      const options = {
+        key: 'rzp_test_V8QAkPFCVP47nH', // Enter the Key ID generated from the Dashboard
+        amount: order.amount,
+        currency: order.currency,
+        name: 'eventease',
+        description: 'Test Transaction',
+        image: 'https://example.com/your_logo',
+        order_id: order.id,
+        handler: function (response) {
+          alert(`Payment successful. Payment ID: ${response.razorpay_payment_id}`);
+        },
+        prefill: {
+          name: 'Pranshu Singh',
+          email: 'singhpranshu950@gmail.com',
+          contact: '7802945268'
+        },
+        notes: {
+          address: 'Razorpay Corporate Office'
+        },
+        theme: {
+          color: '#F37254'
+        }
+      };
+
+      // Check if Razorpay script is loaded
+      if (window.Razorpay) {
+        const rzp1 = new window.Razorpay(options);
+        rzp1.on('payment.failed', function (response) {
+          alert(`Payment failed. Error: ${response.error.description}`);
+        });
+        rzp1.open();
+      } else {
+        alert('Razorpay SDK failed to load. Are you online?');
+      }
+    } catch (error) {
+      console.error('Error creating order or initiating payment', error);
+    }}
 
   return (
     // <div>
@@ -48,7 +107,7 @@ const EventPage = () => {
         <div className="text-xl mt-8">₹{data.eventDetails.price} onwards</div>
         <Link
           className=" w-full flex text-xl justify-center mt-2 bg-gray-950 text-white rounded-lg py-4 hover:bg-white hover:text-gray-950 hover:outline hover:outline-2 transition-all duration-150 hover:shadow-2xl "
-          to={`/events/`}
+          onClick={handlePayment}
         >
           Continue to payment
         </Link>

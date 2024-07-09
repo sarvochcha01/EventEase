@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+
 const HomeScreenCard = (props) => {
+  
+  
   return (
-    <div
+    <div 
       className={`${props.classToModify} flex flex-col h-96 w-full justify-center gap-4 text-center`}
     >
       <h1 className="text-3xl lg:text-5xl font-semibold lg:font-bold flex justify-center">
@@ -14,7 +17,7 @@ const HomeScreenCard = (props) => {
         to={props.linkTo}
         className="flex self-center justify-center bg-gray-950 text-white w-56 rounded-lg py-4 text-lg hover:bg-white hover:text-gray-950 hover:outline hover:outline-2 transition-all duration-150 hover:shadow-2xl "
       >
-        <button>{props.buttonText}</button>
+        <button >{props.buttonText}</button>
       </Link>
     </div>
   );
